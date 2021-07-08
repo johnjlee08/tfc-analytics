@@ -22,7 +22,7 @@ AB_download_date <- "09-11-2019"
 
 # Load the ActBlue data (CSV --> to tibble)
 actblue_data_tbl <- read_csv(file = paste0("data/", AB_download_date, 
-                                      "/schuyler-vanvalkenburg-47705-contributions-all.csv")) %>%
+                                      "/FILE_NAME_HERE.csv")) %>%
   clean_names()
 
 
@@ -85,7 +85,7 @@ est_gender_tbl <- actblue_data_tbl %>%
 # Add the estimated gender back to the original tbl 
 actblue_data_tbl <- actblue_data_tbl %>% 
   left_join(x = ., y = est_gender_tbl, by = "donor_first_name") %>%
-  # Drop the obs where the gender couldn't be estimated (about ~7% of the original dataset)
+  # Drop the obs where the gender couldn't be estimated (about ~X% of the original dataset)
   dplyr::filter(!is.na(gender))
 
 # Let's check the gender estimates (I confirmed that it worked)
@@ -93,7 +93,7 @@ actblue_data_tbl %>% dplyr::select(donor_first_name, gender) %>% head(n = 15)
 
 
 # Objective: create a separate tbl for the donors. 
-# Problem: we need a unique identifier. We can use email, but ~3.5K entries don't have an associated email
+# Problem: we need a unique identifier. We can use email, but ~X entries don't have an associated email
 # Solution: create a unique identifier by finding all of the unique combos of full name and street address
 
 
